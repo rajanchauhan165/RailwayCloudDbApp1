@@ -24,35 +24,30 @@ public class StudentController {
 		this.studentRepo = studentRepo;
 	}
 	
-	@PostMapping("/post1")
+	@PostMapping("/test1")
 	public String postRequest() {
-		return "Returning from Post Request 1";
+		return "Returning from Post Request";
 	}
 	
-	@PutMapping("/put")
+	@PutMapping("/test2")
 	public String putRequest() {
 		return "Returning from Put Request";
 	}
 	
-	@DeleteMapping
-	public String deleteRequest() {
-		return "Returning from delete request";
-	}
-	
-	@PostMapping("/students")
+	@PostMapping("/addstudent")
 	public ResponseEntity<Student> saveStudentHandler(@RequestBody Student student){
 		Student savedStudent= studentRepo.save(student);
 		return new ResponseEntity<Student>(savedStudent,HttpStatus.OK);
 	}
 	
-	@GetMapping("/students/{roll}")
+	@GetMapping("/findstudent/{roll}")
 	public ResponseEntity<Student> getStudentByRoll(@PathVariable Integer roll){
 		Optional<Student> studentOptional = studentRepo.findById(roll);
 		Student student = studentOptional.get();
 		return new ResponseEntity<Student>(student,HttpStatus.OK);
 	}
 	
-	@GetMapping("/students")
+	@GetMapping("/allstudents")
 	public ResponseEntity<List<Student>> getAllStudent(){
 		List<Student> list= studentRepo.findAll();
 		return new ResponseEntity<List<Student>>(list,HttpStatus.OK);
